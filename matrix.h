@@ -44,6 +44,30 @@ double matrix_get(int row, int col, matrix *matrix) {
     return *(values + row * matrix->cols + col);
 }
 
+double *matrix_get_row(int row, matrix *matrix) {
+    double *found_row = (double *) malloc(matrix->cols * sizeof(double));
+    double *aux = found_row;
+
+    for (int i = 0; i < matrix->cols; i++) {
+        *aux = matrix_get(row, i, matrix);
+        aux++;
+    }
+
+    return found_row;
+}
+
+double *matrix_get_col(int col, matrix *matrix) {
+    double *found_col = (double *) malloc(matrix->rows * sizeof(double));
+    double *aux = found_col;
+
+    for (int i = 0; i < matrix->rows; i++) {
+        *aux = matrix_get(i, col, matrix);
+        aux++;
+    }
+
+    return found_col;
+}
+
 void matrix_print(matrix *matrix) {
     double *values = matrix->values;
     for (int i = 0; i < matrix->rows; i++) {
